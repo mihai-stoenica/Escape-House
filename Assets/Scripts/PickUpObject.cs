@@ -2,66 +2,70 @@ using UnityEngine;
 
 public class PickupController : MonoBehaviour
 {
-    public Transform pickupPoint; // Empty GameObject 1m in front of camera
-    private Camera cam;
-    private GameObject heldObject;
-    private bool isHolding = false;
-    private LayerMask pickupLayer;
+    public Transform holdArea;
+    private GameObject heldObj;
+    private Rigidbody heldObjRb;
 
+    public float pickupRange = 5.0f;
+    public float pickupForce = 150.0f;
     void Start()
     {
-        cam = GetComponent<Camera>();
-        pickupLayer = LayerMask.GetMask("Default"); // Pickup objects layer
+
     }
 
     void Update()
     {
-        // Raycast from crosshair
-        Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-        RaycastHit hit;
-
-        // Pick up
-        if (Input.GetMouseButtonDown(0) && !isHolding)
+        if (Input.GetMouseButtonDown(0))
         {
-            if (Physics.Raycast(ray, out hit, 5f, pickupLayer))
+            if(heldObj == null)
             {
-                if (hit.collider.CompareTag("Pickup"))
+                RaycastHit hit;
+                if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, pickupRange)) 
                 {
-                    heldObject = hit.collider.gameObject;
-                    isHolding = true;
-                    // Parent to pickupPoint, reset local transform
-                    heldObject.transform.SetParent(pickupPoint);
-                    heldObject.transform.localPosition = Vector3.zero;
-                    heldObject.transform.localRotation = Quaternion.identity;
-                    // Disable physics
-                    Rigidbody rb = heldObject.GetComponent<Rigidbody>();
-                    if (rb)
-                    {
-                        rb.isKinematic = true;
-                        rb.useGravity = false;
-                    }
-                    Collider col = heldObject.GetComponent<Collider>();
-                    if (col) col.enabled = false;
-                    Debug.Log("Picked up: " + heldObject.name);
+                    pickupObject(hit.transform.gameObject);
                 }
             }
-        }
-
-        // Release
-        if (Input.GetMouseButtonUp(0) && isHolding)
-        {
-            isHolding = false;
-            heldObject.transform.SetParent(null);
-            Rigidbody rb = heldObject.GetComponent<Rigidbody>();
-            if (rb)
+            else
             {
-                rb.isKinematic = false;
-                rb.useGravity = true;
+                dropObject();
             }
-            Collider col = heldObject.GetComponent<Collider>();
-            if (col) col.enabled = true;
-            heldObject = null;
-            Debug.Log("Released object");
+        }
+        if (heldObj != null) 
+        {
+            moveObj();
+        }
+    }
+
+    void pickupObject(GameObject pickObj)
+    {
+        if(pickObj.GetComponent<Rigidbody>())
+        {
+            heldObjRb = pickObj.GetComponent<Rigidbody>();
+            heldObjRb.useGravity = false;
+            heldObjRb.linearDamping = 10;
+            heldObjRb.constraints = RigidbodyConstraints.FreezeRotation;
+
+            heldObjRb.transform.parent = holdArea;
+            heldObj = pickObj;
+        }
+    }
+
+    void dropObject()
+    {
+        heldObjRb.useGravity = true;
+        heldObjRb.linearDamping = 1;
+        heldObjRb.constraints = RigidbodyConstraints.None;
+
+        heldObjRb.transform.parent = null;
+        heldObj = null;
+    }
+
+    void moveObj()
+    {
+        if(Vector3.Distance(heldObj.transform.position, holdArea.position) > 0.1f)
+        {
+            Vector3 moveDirection = (holdArea.position - heldObj.transform.position);
+            heldObjRb.AddForce(moveDirection * pickupForce);
         }
     }
 }
