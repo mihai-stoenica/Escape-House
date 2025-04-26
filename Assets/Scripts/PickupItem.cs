@@ -29,23 +29,25 @@ public class PickupItem : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if(holder != null)
+        if (gameObject.layer == LayerMask.NameToLayer("Pickup"))
         {
-            distance = Vector3.Distance(this.transform.position, holder.transform.position);
-            if (distance <= maxDistance)
+            if(holder != null)
             {
-                this.transform.SetParent(holder.transform);
-                isHolding = true;
-                rb.useGravity = false;
-                rb.detectCollisions = true;
-
-                
+                distance = Vector3.Distance(this.transform.position, holder.transform.position);
+                if (distance <= maxDistance)
+                {
+                    this.transform.SetParent(holder.transform);
+                    isHolding = true;
+                    rb.useGravity = false;
+                    rb.detectCollisions = true;
+                }   
             }
+            else
+            {
+                Debug.Log("Holder not found");
+            } 
         }
-        else
-        {
-            Debug.Log("Holder not found");
-        }
+        
     }
 
     private void OnMouseUp()
