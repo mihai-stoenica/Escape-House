@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class DoorController : MonoBehaviour
+public class PictureTwist : MonoBehaviour
 {
     private Animator animator;
-    private bool isOpen = false;
+    private bool isTwisted = false;
 
     void Start()
     {
@@ -14,17 +14,17 @@ public class DoorController : MonoBehaviour
         }
     }
 
-    public void ToggleDoor()
+    public void TogglePicture()
     {
-        if (isOpen)
+        if (isTwisted)
         {
-            animator.SetTrigger("CloseDoor");
-            isOpen = false;
+            animator.SetTrigger("OpenPicture");
+            isTwisted = false;
         }
         else
         {
-            animator.SetTrigger("OpenDoor");
-            isOpen = true;
+            animator.SetTrigger("ClosePicture");
+            isTwisted = true;
         }
     }
 }
