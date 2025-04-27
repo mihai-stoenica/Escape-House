@@ -30,6 +30,7 @@ public class ClueManager : MonoBehaviour
         }
 
         int randomIndex = Random.Range(0, cluesNumber);
+        //Debug.Log(randomIndex);
         if (clues[randomIndex] != null)
             clues[randomIndex].SetActive(true);
     }
