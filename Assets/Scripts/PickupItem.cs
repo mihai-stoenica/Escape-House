@@ -13,6 +13,7 @@ public class PickupItem : MonoBehaviour
 
     void Start()
     {
+        this.transform.SetParent(null);
         rb = GetComponent<Rigidbody>();
         holder = PickupHolder.Instance;
     }
@@ -55,7 +56,7 @@ public class PickupItem : MonoBehaviour
         Drop();
     }
 
-   
+
 
     private void Hold()
     {
@@ -73,6 +74,7 @@ public class PickupItem : MonoBehaviour
             //throw
         }
     }
+
 
     private void Drop()
     {
