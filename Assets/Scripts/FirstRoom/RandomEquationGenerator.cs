@@ -8,6 +8,11 @@ public class RandomEquationGenerator : MonoBehaviour
     void Start()
     {
         equationText = GetComponentInChildren<TextMeshPro>();
+        if(equationText == null)
+        {
+            Debug.LogError("TextMeshPro component not found in children.");
+            return;
+        }
     }
 
     string GenerateRandomEquation()
@@ -46,6 +51,14 @@ public class RandomEquationGenerator : MonoBehaviour
 
     public int InitializePaper()
     {
+        if (equationText == null)
+            equationText = GetComponentInChildren<TextMeshPro>();
+
+        if (equationText == null)
+        {
+            Debug.LogError("TextMeshPro component not found in children.");
+            return -1;
+        }
         equationText.text = GenerateRandomEquation();
         return solution;
     }
