@@ -2,11 +2,10 @@ using UnityEngine;
 
 public class BeamReflector : MonoBehaviour
 {
-    public int maxReflections = 5;
+    public int maxReflections = 15;
     public float maxDistance = 100f;
     private LineRenderer lineRenderer;
 
-    // Create a layer mask that ignores the "Glass" layer
     private int layerMask;
 
     void Start()
@@ -32,7 +31,6 @@ public class BeamReflector : MonoBehaviour
                 lineRenderer.positionCount++;
                 lineRenderer.SetPosition(reflections + 1, hit.point);
 
-                // Check for mirror
                 if (hit.collider.CompareTag("Mirror"))
                 {
                     direction = Vector3.Reflect(direction, hit.normal);
@@ -41,13 +39,11 @@ public class BeamReflector : MonoBehaviour
                 }
                 else
                 {
-                    // Hit something that's not a mirror — end
                     break;
                 }
             }
             else
             {
-                // If ray goes off into space
                 lineRenderer.positionCount++;
                 lineRenderer.SetPosition(reflections + 1, position + direction * maxDistance);
                 break;

@@ -17,7 +17,7 @@ public class PlayerInteract : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.F))
         {
             RaycastHit hit;
             if (Physics.Raycast(transform.position, transform.forward, out hit, interactRange))
