@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - Pickup
+  - Mirror
   layers:
   - Default
   - TransparentFX
@@ -13,8 +14,8 @@ TagManager:
   - Water
   - UI
   - Pickup
-  - 
-  - 
+  - Glass
+  - Mirror
   - 
   - 
   - 
