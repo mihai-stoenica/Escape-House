@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BeamReflector : MonoBehaviour
 {
-    public int maxReflections = 15;
+    public int maxReflections = 6;
     public float maxDistance = 100f;
     private LineRenderer lineRenderer;
 
@@ -31,6 +31,16 @@ public class BeamReflector : MonoBehaviour
                 lineRenderer.positionCount++;
                 lineRenderer.SetPosition(reflections + 1, hit.point);
 
+                if (hit.collider.CompareTag("Candle") && reflections >= maxReflections / 2 + 1)
+                {
+                    CandleController reaction = hit.collider.GetComponentInParent<CandleController>();
+                    if (reaction != null)
+                    {
+                        reaction.BeamHit();
+                    }
+                }
+
+
                 if (hit.collider.CompareTag("Mirror"))
                 {
                     direction = Vector3.Reflect(direction, hit.normal);
@@ -41,6 +51,7 @@ public class BeamReflector : MonoBehaviour
                 {
                     break;
                 }
+
             }
             else
             {

@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Pickup
   - Mirror
+  - Rotable
+  - Candle
   layers:
   - Default
   - TransparentFX

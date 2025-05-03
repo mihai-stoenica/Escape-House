@@ -9,6 +9,11 @@ public class PlayerInteract : MonoBehaviour
 
     PlayerController playerController;
     CameraMovment cameraMovment;
+
+
+    private Transform currentRotatable; 
+    public float rotationSpeed = 100f;
+
     void Start()
     {
         playerController = transform.parent.GetComponent<PlayerController>();
@@ -51,7 +56,21 @@ public class PlayerInteract : MonoBehaviour
                 {
                     keyFragmentsController.CollectFragment();
                 }
+
+                
             }
+
+
+
+            if (currentRotatable != null)
+            {
+                float scroll = Input.GetAxis("Mouse ScrollWheel");
+                if (scroll != 0f)
+                {
+                    currentRotatable.Rotate(Vector3.up, scroll * rotationSpeed);
+                }
+            }
+
         }
     }
 
