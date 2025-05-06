@@ -8,10 +8,11 @@ public class MirrorPlacer : MonoBehaviour
     public float collideRadius = 3.5f;
     public int maxAttempts = 100;
 
+    private int placedMirrors = 0;
 
     void Start()
     {
-        int placedMirrors = 0;
+        //int placedMirrors = 0;
         int attempts = 0;
         while (placedMirrors < numberOfMirrors && attempts < maxAttempts)
         {

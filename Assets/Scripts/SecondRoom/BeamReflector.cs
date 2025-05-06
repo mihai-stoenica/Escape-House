@@ -6,12 +6,18 @@ public class BeamReflector : MonoBehaviour
     public float maxDistance = 100f;
     private LineRenderer lineRenderer;
 
+    public MirrorPlacer mirrorPlacer;
+
     private int layerMask;
+
+    private int numberOfMirrors;
 
     void Start()
     {
         layerMask = ~(1 << LayerMask.NameToLayer("Glass"));
         lineRenderer = GetComponent<LineRenderer>();
+        numberOfMirrors = mirrorPlacer.numberOfMirrors;
+        Debug.Log("Number of mirrors: " + numberOfMirrors);
     }
 
     void Update()
@@ -31,7 +37,7 @@ public class BeamReflector : MonoBehaviour
                 lineRenderer.positionCount++;
                 lineRenderer.SetPosition(reflections + 1, hit.point);
 
-                if (hit.collider.CompareTag("Candle") && reflections >= maxReflections / 2 + 1)
+                if (hit.collider.CompareTag("Candle") && reflections >= numberOfMirrors+1)
                 {
                     CandleController reaction = hit.collider.GetComponentInParent<CandleController>();
                     if (reaction != null)

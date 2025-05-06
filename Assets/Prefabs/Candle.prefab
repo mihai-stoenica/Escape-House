@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 791804346023861938}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.3, z: 0}
+  m_LocalPosition: {x: 0, y: 0.77, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -43,9 +43,9 @@ Light:
   m_Enabled: 1
   serializedVersion: 11
   m_Type: 2
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.96324, b: 0, a: 1}
   m_Intensity: 1
-  m_Range: 2.6165328
+  m_Range: 1.5845618
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -240,6 +240,7 @@ GameObject:
   - component: {fileID: 5351887427350722985}
   - component: {fileID: 2393187935370446358}
   - component: {fileID: 534148167096094360}
+  - component: {fileID: 34468083677130379}
   m_Layer: 0
   m_Name: Candle
   m_TagString: Candle
@@ -301,6 +302,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lightFadeSpeed: 2
   textFadeSpeed: 1.5
+--- !u!114 &34468083677130379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2431708489285864228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da078c859ea876042ace76dd153e3218, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minIntensity: 1.5
+  maxIntensity: 3
+  flickerSpeed: 0.1
 --- !u!1 &3854664945672432680
 GameObject:
   m_ObjectHideFlags: 0
