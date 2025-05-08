@@ -238,10 +238,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5351887427350722985}
-  - component: {fileID: 2393187935370446358}
   - component: {fileID: 534148167096094360}
   - component: {fileID: 34468083677130379}
-  m_Layer: 0
+  - component: {fileID: 7244646112180365854}
+  - component: {fileID: 804788659389233239}
+  - component: {fileID: 2393187935370446358}
+  m_Layer: 6
   m_Name: Candle
   m_TagString: Candle
   m_Icon: {fileID: 0}
@@ -267,6 +269,80 @@ Transform:
   - {fileID: 1609439832234516375}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &534148167096094360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2431708489285864228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 509ba79748b6b234e98c2a87f733a2df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textMeshTransform: {fileID: 0}
+  lightFadeSpeed: 2
+  textFadeSpeed: 1.5
+  chestController: {fileID: 0}
+--- !u!114 &34468083677130379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2431708489285864228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da078c859ea876042ace76dd153e3218, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minIntensity: 1.5
+  maxIntensity: 3
+  flickerSpeed: 0.1
+--- !u!114 &7244646112180365854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2431708489285864228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e09b95ecc26496469d711099ba8a35b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isHolding: 0
+  throwForce: 600
+  maxDistance: 3
+  distance: 0
+--- !u!54 &804788659389233239
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2431708489285864228}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!65 &2393187935370446358
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -288,35 +364,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &534148167096094360
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2431708489285864228}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 509ba79748b6b234e98c2a87f733a2df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lightFadeSpeed: 2
-  textFadeSpeed: 1.5
---- !u!114 &34468083677130379
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2431708489285864228}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da078c859ea876042ace76dd153e3218, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minIntensity: 1.5
-  maxIntensity: 3
-  flickerSpeed: 0.1
 --- !u!1 &3854664945672432680
 GameObject:
   m_ObjectHideFlags: 0

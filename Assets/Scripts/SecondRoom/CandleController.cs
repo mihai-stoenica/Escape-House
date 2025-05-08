@@ -5,6 +5,11 @@ using System.Collections.Generic;
 
 public class CandleController : MonoBehaviour
 {
+    public Transform textMeshTransform; 
+
+    private Vector3 lockedPosition;
+    private Quaternion lockedRotation;
+
     private Light candleLight; 
     private TextMeshPro textToReveal; 
     public float lightFadeSpeed = 1.2f;
@@ -40,6 +45,14 @@ public class CandleController : MonoBehaviour
         candleTwitch = GetComponent<CandleTwitch>();
         candleLight = GetComponentInChildren<Light>();
         textToReveal = GetComponentInChildren<TextMeshPro>();
+
+        textMeshTransform = textToReveal.transform;
+        if (textMeshTransform != null)
+        {
+            lockedPosition = textMeshTransform.position;
+            lockedRotation = textMeshTransform.rotation;
+        }
+
         if (candleLight != null)
         {
             candleLight.intensity = 0f;
@@ -76,16 +89,16 @@ public class CandleController : MonoBehaviour
     {
         if (beamIsHitting && !isDoneFading)
         {
-            
+
             currentLightIntensity = Mathf.MoveTowards(currentLightIntensity, targetLightIntensity, Time.deltaTime * lightFadeSpeed);
             candleLight.intensity = currentLightIntensity;
-            
-            
+
+
             currentTextAlpha = Mathf.MoveTowards(currentTextAlpha, targetTextAlpha, Time.deltaTime * textFadeSpeed);
             Color c = textToReveal.color;
             c.a = currentTextAlpha;
             textToReveal.color = c;
-            if(currentLightIntensity >= targetLightIntensity && currentTextAlpha >= targetTextAlpha)
+            if (currentLightIntensity >= targetLightIntensity && currentTextAlpha >= targetTextAlpha)
             {
                 isDoneFading = true;
             }
@@ -94,6 +107,15 @@ public class CandleController : MonoBehaviour
             {
                 candleTwitch.SetBeamIsHitting(true);
             }
+        }
+    }
+
+    void LateUpdate()
+    {
+        if (textMeshTransform != null)
+        {
+            textMeshTransform.position = lockedPosition;
+            textMeshTransform.rotation = lockedRotation;
         }
     }
 

@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class BeamReflector : MonoBehaviour
 {
+    private bool isInDevelopment = true;
     public int maxReflections = 6;
     public float maxDistance = 100f;
     private LineRenderer lineRenderer;
@@ -37,7 +38,7 @@ public class BeamReflector : MonoBehaviour
                 lineRenderer.positionCount++;
                 lineRenderer.SetPosition(reflections + 1, hit.point);
 
-                if (hit.collider.CompareTag("Candle") && reflections >= numberOfMirrors+1)
+                if (hit.collider.CompareTag("Candle") && (reflections >= numberOfMirrors-1 || isInDevelopment))
                 {
                     CandleController reaction = hit.collider.GetComponentInParent<CandleController>();
                     if (reaction != null)
