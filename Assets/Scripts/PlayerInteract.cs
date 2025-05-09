@@ -5,15 +5,17 @@ public class PlayerInteract : MonoBehaviour
 {
     public float interactRange = 10f;
     public GameObject inputMenu;
+    public GameObject gridMenu;
     private ChestController currentChest;
+    public GridGenerator gridGenerator;
 
     PlayerController playerController;
     CameraMovment cameraMovment;
 
 
-    private Transform currentRotatable; 
+    private Transform currentRotatable;
     public float rotationSpeed = 100f;
-
+    
     void Start()
     {
         playerController = transform.parent.GetComponent<PlayerController>();
@@ -31,7 +33,8 @@ public class PlayerInteract : MonoBehaviour
                 PictureTwist twist = hit.transform.GetComponent<PictureTwist>();
                 ChestController chest = hit.transform.GetComponent<ChestController>();
                 KeyFragmentsController keyFragmentsController = hit.transform.GetComponent<KeyFragmentsController>();
-                
+                GridHindController gridHindController = hit.transform.GetComponent<GridHindController>();
+
                 if (door != null)
                 {
                     door.ToggleDoor();
@@ -45,19 +48,28 @@ public class PlayerInteract : MonoBehaviour
                     currentChest = chest;
                     inputMenu.SetActive(true);
 
+                    ToggleMovement();
                     
-                    playerController.canMove = false;
-                    cameraMovment.canMove = false;
-
-                    Cursor.lockState = CursorLockMode.None; 
                     Cursor.visible = true;
+
                 }
                 if (keyFragmentsController != null)
                 {
                     keyFragmentsController.CollectFragment();
                 }
+                if (gridHindController != null)
+                {
+                    gridMenu.SetActive(true);
+                    gridGenerator.BuildGrid(13, 5, new Vector2Int(7, 4), new Vector2Int(0, 4));
 
-                
+                    
+
+                    ToggleMovement();
+
+                    Cursor.visible = true;
+                }
+
+
             }
 
 
@@ -98,16 +110,22 @@ public class PlayerInteract : MonoBehaviour
 
             inputMenu.SetActive(false);
             currentChest = null;
-            playerController.canMove = true;
-            cameraMovment.canMove = true;
-            Cursor.lockState = CursorLockMode.Locked; 
-            Cursor.visible = false;                   
-            
 
+            ToggleMovement();
         }
         else
         {
             Debug.LogError("No chest to unlock.");
         }
     }
+
+    void ToggleMovement()
+    {
+        playerController.canMove = !playerController.canMove;
+        cameraMovment.canMove = !cameraMovment.canMove;
+
+        Cursor.lockState = (Cursor.lockState == CursorLockMode.None) ?  CursorLockMode.Locked : CursorLockMode.None;
+        Cursor.visible = !Cursor.visible;
+    }
+
 }
