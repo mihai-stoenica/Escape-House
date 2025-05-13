@@ -1,12 +1,16 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-public class UIGridCell : MonoBehaviour
+using System;
+using System.Collections.Generic;
+public class UIGridCell : MonoBehaviour, IPointerClickHandler
 {
     public Vector2Int coords;
+    //private static Vector2Int[] path;
+    private static Stack<Vector2Int> path = new Stack<Vector2Int>();
     public bool selected = false;
     private Image image;
-
+    private bool isEndPoint = false;
     private void Awake()
     {
         image = GetComponent<Image>();
@@ -19,14 +23,20 @@ public class UIGridCell : MonoBehaviour
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        Toggle();
+        if (!isEndPoint && isNeighbour(previous))
+        {
+            Toggle();
+        }
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
+    /*public void OnPointerEnter(PointerEventData eventData)
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && !isEndPoint)
+        {
             Toggle();
-    }
+        }
+            
+    }*/
 
     private void Toggle()
     {
@@ -34,18 +44,23 @@ public class UIGridCell : MonoBehaviour
         image.color = selected ? Color.yellow : Color.white;
     }
 
-    public void ResetCell()
-    {
-        selected = false;
-        image.color = Color.white;
-    }
-
     public void MarkStart() 
     { 
         image.color = Color.green; 
+        isEndPoint = true;
     }
     public void MarkDestination() 
-    { 
+    {
+        isEndPoint = true;
         image.color = Color.red;
+    }
+
+    public bool isNeighbour(Vector2Int other)
+    {
+        if(other == null || Math.Abs(other.x - coords.x) > 1 || Math.Abs(other.y - coords.y) > 1)
+        {
+            return false;
+        }
+        return true;
     }
 }

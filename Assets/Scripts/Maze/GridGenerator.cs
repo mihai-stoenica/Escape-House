@@ -38,9 +38,6 @@ public class GridGenerator : MonoBehaviour
         }
         
         StartCoroutine(MarkStartAfterInstantiation(start, destination));
-
-        //uiCells[start.x, start.y].MarkStart();
-        //uiCells[destination.x, destination.y].MarkDestination();
     }
 
     private IEnumerator MarkStartAfterInstantiation(Vector2Int start, Vector2Int destination)
@@ -51,21 +48,9 @@ public class GridGenerator : MonoBehaviour
         uiCells[destination.x, destination.y].MarkDestination();
     }
 
-
-    public List<Vector2Int> GetUserPath()
-    {
-        List<Vector2Int> path = new List<Vector2Int>();
-        foreach (var cell in uiCells)
-        {
-            if (cell.selected)
-                path.Add(cell.coords);
-        }
-        return path;
-    }
-
-    public void ResetGrid()
+    /*public void ResetGrid()
     {
         foreach (var cell in uiCells)
             cell.ResetCell();
-    }
+    }*/
 }
