@@ -6,11 +6,14 @@ using System.Collections.Generic;
 public class UIGridCell : MonoBehaviour, IPointerClickHandler
 {
     public Vector2Int coords;
-    private static Stack<Vector2Int> path = new Stack<Vector2Int>();
+    public static Stack<Vector2Int> path = new Stack<Vector2Int>();
     public bool selected = false;
     private Image image;
-    private bool isEndPoint = false;
+    private bool isStart = false;
     private static Vector2Int destination;
+
+    private static GridHintController gridController;
+
 
     private void Awake()
     {
@@ -18,6 +21,12 @@ public class UIGridCell : MonoBehaviour, IPointerClickHandler
         if(image == null)
         {
             Debug.LogError("Image component not found on UIGridCell.");
+            return;
+        }
+        gridController = GetComponentInParent<GridHintController>();
+        if (gridController == null)
+        {
+            Debug.LogError("grid controller component not found on UIGridCell.");
             return;
         }
     }
@@ -29,7 +38,7 @@ public class UIGridCell : MonoBehaviour, IPointerClickHandler
             Debug.LogError("Path stack is empty. Cannot toggle cell.");
         }
         Vector2Int currentPos = path.Peek();
-        if ((!isEndPoint && isNeighbour(currentPos)) || currentPos == coords)
+        if (!isStart && (isNeighbour(currentPos) || currentPos == coords))
         {
             Toggle();
         }
@@ -42,13 +51,15 @@ public class UIGridCell : MonoBehaviour, IPointerClickHandler
             selected = true;
             image.color = Color.yellow;
             path.Push(coords);
-            if (isNeighbour(destination))
+            if (coords == destination)
             {
-                while(path.Count > 0)
-                {
-                    Debug.Log("Path: " + path.Pop());
-                }
-                
+                //while(path.Count > 0)
+                //{
+
+                //Debug.Log("Popping path: " + path.Pop());
+                //}
+                gridController.UpdatePath(destination);
+                //}
             }
         }
         else
@@ -62,18 +73,19 @@ public class UIGridCell : MonoBehaviour, IPointerClickHandler
                 path.Pop();
             }
         }
+
         
     }
 
     public void MarkStart() 
-    { 
+    {
+        isStart = true;
         image.color = Color.green;
-        isEndPoint = true;
+        
         path.Push(coords);
     }
     public void MarkDestination() 
     {
-        isEndPoint = true;
         image.color = Color.red;
         destination = coords;
     }

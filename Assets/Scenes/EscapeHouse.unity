@@ -1517,7 +1517,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 0c14e95a6a9ea6f4a882107ef2e12ea1, type: 2}
     - target: {fileID: 7717168295872739861, guid: 166cd9534c3fe4c4daa5011af2a24f6c, type: 3}
       propertyPath: m_Name
-      value: Destination1Grid
+      value: Destination2Grid
       objectReference: {fileID: 0}
     - target: {fileID: 7717168295872739861, guid: 166cd9534c3fe4c4daa5011af2a24f6c, type: 3}
       propertyPath: m_Layer
@@ -1587,9 +1587,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7717168295872739861, guid: 166cd9534c3fe4c4daa5011af2a24f6c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 143052304}
-    - targetCorrespondingSourceObject: {fileID: 7717168295872739861, guid: 166cd9534c3fe4c4daa5011af2a24f6c, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 143052305}
   m_SourcePrefab: {fileID: 100100000, guid: 166cd9534c3fe4c4daa5011af2a24f6c, type: 3}
 --- !u!1 &143052303 stripped
 GameObject:
@@ -1617,18 +1614,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 0.1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &143052305
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 143052303}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55dab4022df2ca941829ec6fc92a8cb6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &153532146 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7717168295872739861, guid: 166cd9534c3fe4c4daa5011af2a24f6c, type: 3}
@@ -5006,6 +4991,7 @@ GameObject:
   - component: {fileID: 647439041}
   - component: {fileID: 647439043}
   - component: {fileID: 647439044}
+  - component: {fileID: 647439045}
   m_Layer: 5
   m_Name: GridDestination1
   m_TagString: Untagged
@@ -5108,6 +5094,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cellPrefab: {fileID: 8294825604900761367, guid: cceb8ab4817c6ec42a08ab12a84f7df9, type: 3}
   gridParent: {fileID: 647439040}
+  isBuilt: 0
+--- !u!114 &647439045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 647439039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a275bee42c2f9c24589bb920dd3213f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &665781749
 GameObject:
   m_ObjectHideFlags: 0
@@ -5127,7 +5126,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &665781750
 Transform:
   m_ObjectHideFlags: 0
@@ -5739,7 +5738,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 0c14e95a6a9ea6f4a882107ef2e12ea1, type: 2}
     - target: {fileID: 7717168295872739861, guid: 166cd9534c3fe4c4daa5011af2a24f6c, type: 3}
       propertyPath: m_Name
-      value: Destination2Grid
+      value: Destination1Grid
       objectReference: {fileID: 0}
     - target: {fileID: 7717168295872739861, guid: 166cd9534c3fe4c4daa5011af2a24f6c, type: 3}
       propertyPath: m_Layer
@@ -5811,7 +5810,7 @@ PrefabInstance:
       addedObject: {fileID: 1535536852}
     - targetCorrespondingSourceObject: {fileID: 7717168295872739861, guid: 166cd9534c3fe4c4daa5011af2a24f6c, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1535536853}
+      addedObject: {fileID: 1535536858}
   m_SourcePrefab: {fileID: 100100000, guid: 166cd9534c3fe4c4daa5011af2a24f6c, type: 3}
 --- !u!1001 &772032287
 PrefabInstance:
@@ -7986,7 +7985,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1116943956
 Transform:
   m_ObjectHideFlags: 0
@@ -8568,7 +8567,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1194974352
 Transform:
   m_ObjectHideFlags: 0
@@ -8781,6 +8780,9 @@ MonoBehaviour:
   cellSize: 3
   cellPrefab: {fileID: 6041174135282776249, guid: 9451c9d6a297a7a40a965ab91c4dd10d, type: 3}
   mazeOrigin: {x: -23.1, y: 6.55, z: -3}
+  start: {x: 7, y: 0}
+  destination1: {x: 12, y: 0}
+  destination2: {x: 0, y: 0}
 --- !u!4 &1263645183
 Transform:
   m_ObjectHideFlags: 0
@@ -9140,7 +9142,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1353800080
 Transform:
   m_ObjectHideFlags: 0
@@ -10850,7 +10852,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 0.1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1535536853
+--- !u!114 &1535536858
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10859,7 +10861,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1535536847}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55dab4022df2ca941829ec6fc92a8cb6, type: 3}
+  m_Script: {fileID: 11500000, guid: a275bee42c2f9c24589bb920dd3213f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1536878568

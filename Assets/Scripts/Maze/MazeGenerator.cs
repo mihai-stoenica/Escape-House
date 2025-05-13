@@ -11,18 +11,17 @@ public class MazeGenerator : MonoBehaviour
 
     private MazeCell[,] grid;
 
-    
-    public (int, int) start = (7, 0);
-    public (int, int) destination1 = (0, 0);
-    public (int, int) destination2 = (12, 0);
+    public Vector2Int start = new Vector2Int(7, 0);
+    public Vector2Int destination1 = new Vector2Int(0, 0);
+    public Vector2Int destination2 = new Vector2Int(12, 0);
 
     void Start()
     {
         CreateGrid();
-        GenerateMaze(7, 0);
+        GenerateMaze(start.x, start.y);
         DeleteEntrances();
-        var path1 = ComputePath(grid[destination1.Item1, destination1.Item2]);
-        var path2 = ComputePath(grid[destination2.Item1, destination2.Item2]);
+        var path1 = ComputePath(grid[destination1.x, destination1.y]);
+        var path2 = ComputePath(grid[destination2.x, destination2.y]);
 
         Debug.Log("Path to destination 1: " + getPathString(path1));
         Debug.Log("Path to destination 2: " + getPathString(path2));
@@ -43,7 +42,6 @@ public class MazeGenerator : MonoBehaviour
         }
     }
 
-
     void GenerateMaze(int x, int y)
     {
         MazeCell current = grid[x, y];
@@ -56,11 +54,10 @@ public class MazeGenerator : MonoBehaviour
 
             if (IsInBounds(nx, ny) && !grid[nx, ny].visited)
             {
-
                 MazeCell next = grid[nx, ny];
-                next.previous = current; 
+                next.previous = current;
 
-                RemoveWallsBetween(current, grid[nx, ny], dir);
+                RemoveWallsBetween(current, next, dir);
                 GenerateMaze(nx, ny);
             }
         }
@@ -112,34 +109,35 @@ public class MazeGenerator : MonoBehaviour
 
     void DeleteEntrances()
     {
-        MazeCell startCell = grid[start.Item1, start.Item2];
-        MazeCell destination1Cell = grid[destination1.Item1, destination1.Item2];
-        MazeCell destination2Cell = grid[destination2.Item1, destination2.Item2];
+        MazeCell startCell = grid[start.x, start.y];
+        MazeCell destination1Cell = grid[destination1.x, destination1.y];
+        MazeCell destination2Cell = grid[destination2.x, destination2.y];
 
         startCell.wallSouth.SetActive(false);
         destination1Cell.wallSouth.SetActive(false);
         destination2Cell.wallSouth.SetActive(false);
     }
 
-    List<MazeCell> ComputePath(MazeCell destination) 
+    List<MazeCell> ComputePath(MazeCell destination)
     {
         List<MazeCell> path = new List<MazeCell>();
         MazeCell current = destination;
 
-        while (current != grid[start.Item1, start.Item2])
+        while (current != grid[start.x, start.y])
         {
             path.Add(current);
             current = current.previous;
         }
         path.Add(current);
-        path.Reverse(); 
+        path.Reverse();
         return path;
     }
 
     string getPathString(List<MazeCell> path)
     {
         string pathString = "";
-        for (int i= 0;i < path.Count - 1;i++) {
+        for (int i = 0; i < path.Count - 1; i++)
+        {
             MazeCell source = path[i];
             MazeCell destination = path[i + 1];
 
@@ -160,10 +158,12 @@ public class MazeGenerator : MonoBehaviour
                 pathString += "B";
             }
         }
-        
+
         return pathString;
     }
-
 }
+
+
+
 
 //-29.85 -6.805, 25.8 + 18.72816,  55.8 + 58.82217

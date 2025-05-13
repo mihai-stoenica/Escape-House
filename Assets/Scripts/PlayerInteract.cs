@@ -56,7 +56,7 @@ public class PlayerInteract : MonoBehaviour
                 PictureTwist twist = hit.transform.GetComponent<PictureTwist>();
                 ChestController chest = hit.transform.GetComponent<ChestController>();
                 KeyFragmentsController keyFragmentsController = hit.transform.GetComponent<KeyFragmentsController>();
-                GridHindController gridHindController = hit.transform.GetComponent<GridHindController>();
+                GridHintController gridHintController = hit.transform.GetComponent<GridHintController>();
 
                 if (door != null)
                 {
@@ -76,13 +76,13 @@ public class PlayerInteract : MonoBehaviour
                     Cursor.visible = true;
                 }
 
-                if (gridHindController != null && !gridMenu.activeSelf)
+                if (gridHintController != null && !gridMenu.activeSelf)
                 {
                     gridMenu.SetActive(true);
 
                     if (!gridGenerator.isBuilt)
                     {
-                        gridGenerator.BuildGrid(13, 5, new Vector2Int(7, 4), new Vector2Int(0, 4));
+                        gridGenerator.BuildGrid(13, 6, new Vector2Int(7, 5), new Vector2Int(12, 5));
                     }
 
                     ToggleMovement();
