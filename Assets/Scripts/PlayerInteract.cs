@@ -24,6 +24,29 @@ public class PlayerInteract : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (inputMenu.activeSelf)
+            {
+                inputMenu.SetActive(false);
+                currentChest = null;
+                ToggleMovement();
+
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+                return;
+            }
+            if (gridMenu.activeSelf)
+            {
+                gridMenu.SetActive(false);
+                ToggleMovement();
+
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+                return;
+            }
+        }
+
         if (Input.GetKeyDown(KeyCode.F))
         {
             RaycastHit hit;
@@ -47,25 +70,24 @@ public class PlayerInteract : MonoBehaviour
                 {
                     currentChest = chest;
                     inputMenu.SetActive(true);
-
                     ToggleMovement();
-                    
-                    Cursor.visible = true;
 
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
                 }
-                if (keyFragmentsController != null)
-                {
-                    keyFragmentsController.CollectFragment();
-                }
-                if (gridHindController != null)
+
+                if (gridHindController != null && !gridMenu.activeSelf)
                 {
                     gridMenu.SetActive(true);
-                    gridGenerator.BuildGrid(13, 5, new Vector2Int(7, 4), new Vector2Int(0, 4));
 
-                    
+                    if (!gridGenerator.isBuilt)
+                    {
+                        gridGenerator.BuildGrid(13, 5, new Vector2Int(7, 4), new Vector2Int(0, 4));
+                    }
 
                     ToggleMovement();
 
+                    Cursor.lockState = CursorLockMode.None;
                     Cursor.visible = true;
                 }
 
@@ -123,9 +145,6 @@ public class PlayerInteract : MonoBehaviour
     {
         playerController.canMove = !playerController.canMove;
         cameraMovment.canMove = !cameraMovment.canMove;
-
-        Cursor.lockState = (Cursor.lockState == CursorLockMode.None) ?  CursorLockMode.Locked : CursorLockMode.None;
-        Cursor.visible = !Cursor.visible;
     }
 
 }

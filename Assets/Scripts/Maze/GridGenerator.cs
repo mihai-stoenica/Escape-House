@@ -9,7 +9,7 @@ public class GridGenerator : MonoBehaviour
     [SerializeField] GameObject cellPrefab;
     [SerializeField] Transform gridParent;
     private UIGridCell[,] uiCells;
-
+    public bool isBuilt = false;
 
     
     public void BuildGrid(int width, int height, Vector2Int start, Vector2Int destination)
@@ -36,8 +36,9 @@ public class GridGenerator : MonoBehaviour
 
             }
         }
-        
+
         StartCoroutine(MarkStartAfterInstantiation(start, destination));
+        isBuilt = true;
     }
 
     private IEnumerator MarkStartAfterInstantiation(Vector2Int start, Vector2Int destination)
@@ -48,9 +49,5 @@ public class GridGenerator : MonoBehaviour
         uiCells[destination.x, destination.y].MarkDestination();
     }
 
-    /*public void ResetGrid()
-    {
-        foreach (var cell in uiCells)
-            cell.ResetCell();
-    }*/
+  
 }
