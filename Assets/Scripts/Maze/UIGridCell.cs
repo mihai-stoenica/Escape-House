@@ -23,7 +23,7 @@ public class UIGridCell : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (!isEndPoint && isNeighbour(previous))
+        if (!isEndPoint )
         {
             Toggle();
         }
