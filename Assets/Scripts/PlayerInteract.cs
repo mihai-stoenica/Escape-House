@@ -6,8 +6,10 @@ public class PlayerInteract : MonoBehaviour
     public float interactRange = 10f;
     public GameObject inputMenu;
     public GameObject gridMenu;
+    public GameObject gridMenu2;
     private ChestController currentChest;
     public GridGenerator gridGenerator;
+    public GridGenerator2 gridGenerator2;
 
     PlayerController playerController;
     CameraMovment cameraMovment;
@@ -45,6 +47,15 @@ public class PlayerInteract : MonoBehaviour
                 Cursor.visible = false;
                 return;
             }
+            if (gridMenu2.activeSelf)
+            {
+                gridMenu2.SetActive(false);
+                ToggleMovement();
+
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+                return;
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.F))
@@ -76,19 +87,37 @@ public class PlayerInteract : MonoBehaviour
                     Cursor.visible = true;
                 }
 
-                if (gridHintController != null && !gridMenu.activeSelf)
+                if (gridHintController != null )
                 {
-                    gridMenu.SetActive(true);
-
-                    if (!gridGenerator.isBuilt)
+                    if(gridHintController.name == "Destination1Grid" && !gridMenu.activeSelf)
                     {
-                        gridGenerator.BuildGrid(13, 6, new Vector2Int(7, 5), new Vector2Int(12, 5));
+                        gridMenu.SetActive(true);
+
+                        if (!gridGenerator.isBuilt)
+                        {
+                            gridGenerator.BuildGrid(13, 6, new Vector2Int(7, 5), new Vector2Int(12, 5));
+                        }
+
+                        ToggleMovement();
+
+                        Cursor.lockState = CursorLockMode.None;
+                        Cursor.visible = true;
+                    }
+                    else if(gridHintController.name == "Destination2Grid" && !gridMenu2.activeSelf)
+                    {
+                        gridMenu2.SetActive(true);
+
+                        if (!gridGenerator2.isBuilt)
+                        {
+                            gridGenerator2.BuildGrid(13, 6, new Vector2Int(7, 5), new Vector2Int(0, 5));
+                        }
+
+                        ToggleMovement();
+
+                        Cursor.lockState = CursorLockMode.None;
+                        Cursor.visible = true;
                     }
 
-                    ToggleMovement();
-
-                    Cursor.lockState = CursorLockMode.None;
-                    Cursor.visible = true;
                 }
 
 

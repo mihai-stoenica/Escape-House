@@ -4,23 +4,23 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
 
-public class GridGenerator : MonoBehaviour
+public class GridGenerator2 : MonoBehaviour
 {
     [SerializeField] GameObject cellPrefab;
     [SerializeField] Transform gridParent;
-    private UIGridCell[,] uiCells;
+    private UIGridCell2[,] uiCells;
     public bool isBuilt = false;
 
     public void BuildGrid(int width, int height, Vector2Int start, Vector2Int destination)
     {
-        uiCells = new UIGridCell[width, height];
+        uiCells = new UIGridCell2[width, height];
 
         for (int y = 0; y < height; y++)
         {
             for (int x = 0; x < width; x++)
             {
                 GameObject cell = Instantiate(cellPrefab, gridParent);
-                UIGridCell cellScript = cell.GetComponent<UIGridCell>();
+                UIGridCell2 cellScript = cell.GetComponent<UIGridCell2>();
                 cellScript.coords = new Vector2Int(x, y);
                 uiCells[x, y] = cellScript;
                 /*Debug.Log($"Cell created at {x}, {y}");

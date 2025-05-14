@@ -15,7 +15,10 @@ public class MazeGenerator : MonoBehaviour
     public Vector2Int destination1 = new Vector2Int(0, 0);
     public Vector2Int destination2 = new Vector2Int(12, 0);
 
-    void Start()
+    public string stringPath1;
+    public string stringPath2;
+
+    void Awake()
     {
         CreateGrid();
         GenerateMaze(start.x, start.y);
@@ -23,8 +26,11 @@ public class MazeGenerator : MonoBehaviour
         var path1 = ComputePath(grid[destination1.x, destination1.y]);
         var path2 = ComputePath(grid[destination2.x, destination2.y]);
 
-        Debug.Log("Path to destination 1: " + getPathString(path1));
-        Debug.Log("Path to destination 2: " + getPathString(path2));
+        stringPath1 = getPathString(path1);
+        stringPath2 = getPathString(path2);
+
+        Debug.Log("Path to destination 1: " + stringPath1);
+        Debug.Log("Path to destination 2: " + stringPath2);
     }
 
     void CreateGrid()

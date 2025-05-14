@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System;
 using System.Collections.Generic;
-public class UIGridCell : MonoBehaviour, IPointerClickHandler
+public class UIGridCell2 : MonoBehaviour, IPointerClickHandler
 {
     public Vector2Int coords;
     public static Stack<Vector2Int> path = new Stack<Vector2Int>();
@@ -12,7 +12,7 @@ public class UIGridCell : MonoBehaviour, IPointerClickHandler
     private bool isStart = false;
     private static Vector2Int destination;
 
-    public GridHintController gridController;
+    public GridHintController gridController; 
 
     private void Awake()
     {
@@ -57,7 +57,7 @@ public class UIGridCell : MonoBehaviour, IPointerClickHandler
 
                 //Debug.Log("Popping path: " + path.Pop());
                 //}
-                gridController.UpdatePath1(destination);
+                gridController.UpdatePath2(destination);
                 //}
             }
         }
