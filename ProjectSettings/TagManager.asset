@@ -8,6 +8,7 @@ TagManager:
   - Mirror
   - Rotable
   - Candle
+  - WeightObject
   layers:
   - Default
   - TransparentFX

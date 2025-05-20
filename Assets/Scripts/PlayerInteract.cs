@@ -58,6 +58,8 @@ public class PlayerInteract : MonoBehaviour
             }
         }
 
+        
+
         if (Input.GetKeyDown(KeyCode.F))
         {
             RaycastHit hit;

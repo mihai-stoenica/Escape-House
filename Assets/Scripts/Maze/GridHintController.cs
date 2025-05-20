@@ -18,7 +18,7 @@ public class GridHintController : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("GridHintController Start called, mazeGenerator: " + mazeGenerator);
+        //Debug.Log("GridHintController Start called, mazeGenerator: " + mazeGenerator);
         correctPath1 = mazeGenerator.stringPath1;
         correctPath2 = mazeGenerator.stringPath2;
         if(!ChestController)
