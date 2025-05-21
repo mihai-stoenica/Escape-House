@@ -18,6 +18,17 @@ public class PlayerInteract : MonoBehaviour
     private Transform currentRotatable;
     public float rotationSpeed = 100f;
     
+    private static int waterLayer;
+    private static int layerMask;
+    private static int glassLayer;
+
+    void Awake()
+    {
+        waterLayer = LayerMask.NameToLayer("Water");
+        glassLayer = LayerMask.NameToLayer("Glass");
+        layerMask = ~((1 << waterLayer) | (1 << glassLayer));
+    }
+
     void Start()
     {
         playerController = transform.parent.GetComponent<PlayerController>();
@@ -63,13 +74,14 @@ public class PlayerInteract : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
             RaycastHit hit;
-            if (Physics.Raycast(transform.position, transform.forward, out hit, interactRange))
+            if (Physics.Raycast(transform.position, transform.forward, out hit, interactRange, layerMask))
             {
                 DoorController door = hit.transform.GetComponent<DoorController>();
                 PictureTwist twist = hit.transform.GetComponent<PictureTwist>();
                 ChestController chest = hit.transform.GetComponent<ChestController>();
                 KeyFragmentsController keyFragmentsController = hit.transform.GetComponent<KeyFragmentsController>();
                 GridHintController gridHintController = hit.transform.GetComponent<GridHintController>();
+                FloatingController floatingController = hit.transform.GetComponent<FloatingController>();
 
                 if (door != null)
                 {
@@ -122,6 +134,23 @@ public class PlayerInteract : MonoBehaviour
 
                 }
 
+                if(floatingController != null)
+                {
+                    Debug.Log("FloatingController found");
+                    if (Input.GetKey(KeyCode.H))
+                    {
+                        float scroll = Input.GetAxis("Mouse ScrollWheel");
+
+                        if (scroll > 0f)
+                        {
+                            floatingController.DecreaseDensity();
+                        }
+                        else if (scroll < 0f)
+                        {
+                            floatingController.IncreaseDensity();
+                        }
+                    }
+                }
 
             }
 
