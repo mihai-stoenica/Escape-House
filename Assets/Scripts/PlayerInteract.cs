@@ -69,19 +69,49 @@ public class PlayerInteract : MonoBehaviour
             }
         }
 
-        
-
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKey(KeyCode.H))
         {
             RaycastHit hit;
             if (Physics.Raycast(transform.position, transform.forward, out hit, interactRange, layerMask))
             {
+                FloatingController floatingController = hit.transform.GetComponent<FloatingController>();
+
+                if (floatingController != null)
+                {
+                    //Debug.Log("FloatingController found");
+                    
+                    float scroll = Input.GetAxis("Mouse ScrollWheel");
+
+                    if (scroll > 0f)
+                    {
+                        floatingController.DecreaseDensity();
+                    }
+                    else if (scroll < 0f)
+                    {
+                        floatingController.IncreaseDensity();
+                    }
+                    
+                }
+            }
+                
+        }
+
+        
+
+
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, transform.forward, out hit, interactRange/*, layerMask*/))
+            {
+                
                 DoorController door = hit.transform.GetComponent<DoorController>();
                 PictureTwist twist = hit.transform.GetComponent<PictureTwist>();
                 ChestController chest = hit.transform.GetComponent<ChestController>();
                 KeyFragmentsController keyFragmentsController = hit.transform.GetComponent<KeyFragmentsController>();
                 GridHintController gridHintController = hit.transform.GetComponent<GridHintController>();
-                FloatingController floatingController = hit.transform.GetComponent<FloatingController>();
+                
 
                 if (door != null)
                 {
@@ -93,6 +123,7 @@ public class PlayerInteract : MonoBehaviour
                 }
                 if (chest != null)
                 {
+                    //Debug.Log("Chest found");
                     currentChest = chest;
                     inputMenu.SetActive(true);
                     ToggleMovement();
@@ -132,24 +163,6 @@ public class PlayerInteract : MonoBehaviour
                         Cursor.visible = true;
                     }
 
-                }
-
-                if(floatingController != null)
-                {
-                    Debug.Log("FloatingController found");
-                    if (Input.GetKey(KeyCode.H))
-                    {
-                        float scroll = Input.GetAxis("Mouse ScrollWheel");
-
-                        if (scroll > 0f)
-                        {
-                            floatingController.DecreaseDensity();
-                        }
-                        else if (scroll < 0f)
-                        {
-                            floatingController.IncreaseDensity();
-                        }
-                    }
                 }
 
             }

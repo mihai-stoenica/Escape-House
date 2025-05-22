@@ -6,6 +6,7 @@ public class LightEmmiter : MonoBehaviour
     public Transform target; 
     private LineRenderer line;
     public LayerMask obstacleMask;
+    public bool isCut = false;
 
     void Start()
     {
@@ -22,11 +23,15 @@ public class LightEmmiter : MonoBehaviour
         {
             line.SetPosition(0, transform.position);
             line.SetPosition(1, hit.point); 
+            isCut = true;
         }
         else
         {
             line.SetPosition(0, transform.position);
             line.SetPosition(1, target.position);
+            isCut = false;
         }
     }
+
+    
 }
